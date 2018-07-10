@@ -71,15 +71,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1>Welcome to CodeIgniter!</h1>
 
 	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+		<a href="<?php echo base_url();?>recipes/add">Add recipe</a>
+		<table border="1px" >
+			<th>recipe id</th><th>recipe name</th><th>description</th><th>Action</th>
+				<?php
+						foreach ($recipes_list as $recipe) { ?>
+							<tr>
+								<td><?php echo $recipe['recipe_id']; ?></td>
+								<td><?php echo $recipe['recipe_name']; ?></td>
+								<td><?php echo $recipe['description']; ?></td>
+								<td>
+										<a href="<?php echo base_url();?>recipes/add">Add</a>
+										<a href="<?php echo base_url();?>recipes/update/<?php echo $recipe['recipe_id'];?>">Update</a>
+										<a href="<?php echo base_url();?>recipes/delete/<?php echo $recipe['recipe_id'];?>">Delete</a>
+								</td>
+							</tr>
+					<?php	}
+				?>
+		</table>
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
